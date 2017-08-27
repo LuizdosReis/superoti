@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin
 public class TaskEndpoint {
 
     private final TaskService taskService;
@@ -36,9 +37,15 @@ public class TaskEndpoint {
         return new ResponseEntity<>(taskService.save(task), HttpStatus.CREATED);
     }
 
+
     @PutMapping
     public ResponseEntity<?> update(@Valid @RequestBody Task task){
         return new ResponseEntity<>(taskService.update(task),HttpStatus.OK);
+    }
+
+    @PutMapping("/conclui/{id}")
+    public ResponseEntity<?> conclusion(@PathVariable("id") Long id){
+        return new ResponseEntity<>(taskService.concludes(id),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

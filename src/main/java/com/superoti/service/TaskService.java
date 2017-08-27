@@ -26,6 +26,7 @@ public class TaskService {
 
     public Task save(Task task){
         task.setDataCriacao(LocalDateTime.now());
+        task.setStatus(false);
         return taskRepository.save(task);
     }
 
@@ -42,6 +43,13 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public Task concludes(Long id) {
+        Task task = getById(id);
+        task.setDataConclusao(LocalDateTime.now());
+        task.setStatus(true);
+        return taskRepository.save(task);
+    }
+
     public List<Task> getAll(){
         return taskRepository.getByDataRemocaoIsNull();
     }
@@ -51,4 +59,5 @@ public class TaskService {
             throw new ResourceNotFoundException("Nenhuma task encontrada para o id ",null);
         }
     }
+
 }

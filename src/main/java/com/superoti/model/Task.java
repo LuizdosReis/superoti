@@ -18,7 +18,6 @@ public class Task {
     @NotNull
     private String descricao;
 
-    @NotNull
     private Boolean status;
 
     private LocalDateTime dataCriacao;
